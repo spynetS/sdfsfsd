@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -19,19 +20,30 @@ public class listscript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+    }
+    public void UpdateList()
+    {
         string[] lines = File.ReadAllLines(Application.persistentDataPath + "/Dates.txt");
-        foreach (string line in lines)
+     
+        foreach (Transform child in content)
         {
-            GameObject button = (GameObject)Instantiate(buttonPref);
-            button.GetComponentInChildren<Text>().text = line;
-
-            button.transform.parent = content;
-            button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
-                () => { Click(button.GetComponentInChildren<Text>().text.ToString()); });
+            GameObject.Destroy(child.gameObject);
         }
+       
+            foreach (string line in lines)
+            {
+                GameObject button = (GameObject)Instantiate(buttonPref);
+                button.GetComponentInChildren<Text>().text = line;
 
+                button.transform.parent = content;
+                button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
+                    () => { Click(button.GetComponentInChildren<Text>().text.ToString()); });
+            }
+     
+       
 
     }
+
     void Click(String button)
     {
         int hoursworked;
