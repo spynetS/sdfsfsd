@@ -19,6 +19,8 @@ public class Main2 : MonoBehaviour
     public GameObject Pausebutton;
     public GameObject Scrollview;
     public GameObject SettingsScreen;
+    public GameObject Continue;
+    public GameObject Overwrite;
     public Text scrolltext;
     public Text FinishText;
     public GameObject SureScreen;
@@ -77,10 +79,14 @@ public class Main2 : MonoBehaviour
             }
             EnablePause();
             EndButton.SetActive(true);
+            Continue.SetActive(true);
+            Overwrite.SetActive(false);
 
         }
         else
         {
+            Continue.SetActive(false);
+            Overwrite.SetActive(true);
             if (sure) 
             {
                 PlayerPrefs.SetInt("StartOrEnd", 0);
